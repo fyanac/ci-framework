@@ -84,6 +84,7 @@ data:
         "name": "{{ network.network_name }}",
         "type": "macvlan",
         "master": "ospbr",
+        "mtu": {{ network.mtu | default(1500) }},
         "ipam": {
           "type": "whereabouts",
           "range": "{{ network[_ipv.network_vX] }}",
@@ -99,6 +100,7 @@ data:
         "name": "octavia",
         "type": "bridge",
         "bridge": "octbr",
+        "mtu": {{ network.mtu | default(1500) }},
         "ipam": {
           "type": "whereabouts",
           "range": "{{ network[_ipv.network_vX] }}",
@@ -124,6 +126,7 @@ data:
         "name": "ironic",
         "type": "bridge",
         "bridge": "ironic",
+        "mtu": {{ network.mtu | default(1500) }},
         "ipam": {
           "type": "whereabouts",
           "range": "{{ network[_ipv.network_vX] }}",
@@ -139,6 +142,7 @@ data:
         "name": "{{ network.network_name }}",
         "type": "macvlan",
         "master": "{{ network.network_name if network.vlan_id is defined else ns.interfaces[network.network_name] }}",
+        "mtu": {{ network.mtu | default(1500) }},
         "ipam": {
           "type": "whereabouts",
           "range": "{{ network[_ipv.network_vX] }}",
